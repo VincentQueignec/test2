@@ -1,0 +1,43 @@
+.wellness-app-bloc {
+  h3 {
+    font-size: 40px;
+    margin: 0;
+  }
+  h4 {
+    font-size: 35px;
+    margin: 0;
+  }
+  h6 {
+    font-size: 25px;
+    margin: 10px 0 0;
+  }
+  p {
+    font-size: 25px;
+  }
+
+  .separator {
+    margin-top: 20px;
+  }
+
+  .bloc-apropos {
+    display: flex;
+    img {
+      height: 400px;
+    }
+    div {
+      margin-top: 30px;
+    }
+  }
+
+  .image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .duo-img {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

@@ -1,0 +1,59 @@
+<div class="site-container">
+  <header>
+    <nav>
+      <div class="underline-animated" routerLink="">
+        <a name="linktotop">Portfolio</a>
+      </div>
+      <div class="underline-animated" routerLink="">
+        <a>À propos de moi</a>
+      </div>
+      <div class="underline-animated" routerLink="">
+        <a>CV</a>
+      </div>
+    </nav>
+    <div class="socials">
+      <nav class="menu">
+        <input type="checkbox" class="menu-open" name="menu-open" id="menu-open"/>
+        <label class="menu-open-button" for="menu-open">
+          <span class="hamburger hamburger-1"></span>
+          <span class="hamburger hamburger-2"></span>
+          <span class="hamburger hamburger-3"></span>
+        </label>
+
+        <div class="menu-item" onclick="location.href='mailto:xyz@abc.com';" >
+          <mat-icon class="material-icons" matTooltip="Mail">mail</mat-icon> </div>
+        <div class="menu-item" (click)="copyToClipboard('http://localhost:4200/')" matTooltip="Partager">
+          <mat-icon class="material-icons">share</mat-icon> </div>
+        <div class="menu-item" (click)="openMedium()" matTooltip="Medium">
+          <mat-icon class="material-icons" svgIcon="medium-icon"></mat-icon>
+        </div>
+        <div class="menu-item" (click)="openLindekin()" matTooltip="Linkedin">
+          <mat-icon class="material-icons" svgIcon="linkedin-icon"></mat-icon>
+        </div>
+
+      </nav>
+
+      <!-- filters -->
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="shadowed-goo">
+
+            <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feGaussianBlur in="goo" stdDeviation="3" result="shadow" />
+            <feColorMatrix in="shadow" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2" result="shadow" />
+            <feOffset in="shadow" dx="1" dy="1" result="shadow" />
+            <feBlend in2="shadow" in="goo" result="goo" />
+            <feBlend in2="goo" in="SourceGraphic" result="mix" />
+          </filter>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in2="goo" in="SourceGraphic" result="mix" />
+          </filter>
+        </defs>
+      </svg>
+    </div>
+  </header>
+  <router-outlet class="page-body"></router-outlet>
+</div>

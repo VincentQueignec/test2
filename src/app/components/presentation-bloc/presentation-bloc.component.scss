@@ -1,0 +1,78 @@
+@import '../../../styles';
+
+.bloc-presentation {
+  max-width: 900px;
+  font-size: 35px;
+  h2 {
+    font-family: Playfair, serif;
+  }
+}
+
+.bloc-portfolio, .bloc-apropos-moi {
+  font-size: 35px;
+  h2 {
+    font-family: Playfair, serif;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  max-height: 60vh;
+  cursor: pointer;
+  .image-container-wrapper {
+    max-height: inherit;
+    width: 50%;
+    .image-container {
+      max-height: inherit;
+      img {
+        max-height: inherit;
+      }
+      .img2 {
+        margin-top: -565px;
+      }
+    }
+  }
+  .project-details-wrap {
+    margin-top: -20px;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    line-height: 20px;
+    h4 {
+      margin: 0;
+      text-align: center;
+    }
+    h6 {
+      margin: 10px 0 0;
+      font-size: 16px;
+      text-align: center;
+    }
+    p {
+      margin: 10px 0 0;
+      font-size: 15px;
+      text-align: center;
+    }
+  }
+}
+
+.hover {
+  :hover {
+    & .visible {
+      visibility: hidden !important;
+    }
+    & .hidden {
+      visibility: visible !important;
+    }
+  }
+}

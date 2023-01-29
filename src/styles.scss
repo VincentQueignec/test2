@@ -1,21 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
-@font-face { font-family: Gentium; src: url('gentium-basic.regular.ttf'); }
-@font-face { font-family: Nunito; src: url('nunito-sans.regular.ttf'); }
-@font-face { font-family: Didact; src: url('didact-gothic.regular.ttf'); }
+@use "sass:math";
+@import '~material-icons/iconfont/material-icons.css';
+@font-face { font-family: Bree; src: url('/assets/fonts/BreeSerif-Regular.ttf'); }
+@font-face { font-family: Playfair; src: url('/assets/fonts/PlayfairDisplay-Regular.ttf'); }
+@font-face { font-family: Rasa; src: url('/assets/fonts/Rasa-Regular.ttf'); }
+
+$primary: #D4C9C0;
+$secondary: #937D64;
 
 html {
   scroll-behavior: smooth;
+  overflow-x:hidden
 }
 
 body {
-  background-color: #D4C9C0;
-  font-family: Didact, serif;
+  background-color: $primary;
+  font-family: Rasa, serif;
 }
 
 header {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -37,14 +43,26 @@ header {
       padding-left: 0;
       font-weight: bold;
       position:relative;
-      font-family: Gentium, serif;
+      font-family: Bree, serif;
       font-size: 20px;
     }
-  }
 
-  a {
-    cursor: pointer;
+    a {
+      cursor: pointer;
+    }
   }
+}
+
+.primary-text {
+  font-family: Bree, serif;
+}
+
+.secondary-text {
+  font-family: Playfair, serif;
+}
+
+.tertiary-text {
+  font-family: Rasa, serif;
 }
 
 .underline-animated:after {
@@ -77,5 +95,144 @@ header {
   @media screen and (max-width: 1280px) {
     padding-right: 20px;
     padding-left: 20px;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+//vars
+$fg:$secondary;
+$bg:#3f51b5;
+$pi:3.14;
+
+//config
+$menu-items:4;
+$open-distance:85px;
+$opening-angle:$pi - .2;
+
+%goo{
+  filter:url('#shadowed-goo');
+  // debug
+  // background:rgba(255,0,0,0.2);
+}
+%ball{
+  background:$fg;
+  border-radius:100%;
+  width:60px;
+  height:60px;
+  margin-left:-40px;
+  position:absolute;
+  top:20px;
+  color:white;
+  text-align:center;
+  line-height:80px;
+  transform:translate3d(0,0,0);
+  transition:transform ease-out 200ms;
+}
+.menu-open{
+  display:none;
+}
+.menu-item{
+  @extend %ball;
+}
+.hamburger{
+  $width:25px;
+  $height:3px;
+  width:$width;
+  height:$height;
+  background:white;
+  display:block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-$width/2;
+  margin-top:-$height/2;
+  transition:transform 200ms;
+}
+$hamburger-spacing:8px;
+.hamburger-1{
+  transform:translate3d(0,-$hamburger-spacing,0);
+}
+.hamburger-2{
+  transform:translate3d(0,0,0);
+}
+.hamburger-3{
+  transform:translate3d(0,$hamburger-spacing,0);
+}
+.menu-open:checked+.menu-open-button{
+  .hamburger-1{
+    transform:translate3d(0,0,0) rotate(45deg);
+  }
+  .hamburger-2{
+    transform:translate3d(0,0,0) scale(0.1,1);
+  }
+  .hamburger-3{
+    transform:translate3d(0,0,0) rotate(-45deg);
+  }
+}
+.menu{
+  @extend %goo;
+  $width:380px;
+  $height:250px;
+  position:absolute;
+  padding-left: 150px;
+  width:$width;
+  height:$height;
+  box-sizing:border-box;
+  font-size:20px;
+  text-align:left;
+}
+
+
+.menu-item{
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  &:hover{
+    background:white;
+    color:$fg;
+    svg {
+      path {
+        fill: $fg;
+      }
+    }
+  }
+  @for $i from 1 through $menu-items{
+    &:nth-child(#{$i+2}){
+      transition-duration:10ms+(60ms*($i));
+    }
+  }
+}
+
+.menu-open-button{
+  @extend %ball;
+  z-index:2;
+  transition-timing-function:cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  transition-duration:400ms;
+  transform:scale(1.1,1.1) translate3d(0,0,0);
+  cursor:pointer;
+}
+.menu-open-button:hover{
+  transform:scale(1.2,1.2) translate3d(0,0,0);
+}
+.menu-open:checked+.menu-open-button{
+  transition-timing-function:linear;
+  transition-duration:200ms;
+  transform:scale(0.8,0.8) translate3d(0,0,0);
+}
+
+.menu-open:checked~.menu-item{
+  transition-timing-function:cubic-bezier(0.935, 0.000, 0.340, 1.330);
+  @for $i from 1 through $menu-items{
+    $angle:(($pi - $opening-angle)/2)+(($opening-angle/($menu-items - 1))*($i - 1));
+
+    &:nth-child(#{$i+2}){
+      transition-duration:80ms+(80ms*$i);
+      transform:translate3d(math.cos($angle)*$open-distance,math.sin($angle)*$open-distance,0);
+    }
   }
 }
